@@ -1,7 +1,7 @@
 require 'formula'
 
 class Openmodelica < Formula
-  homepage ''
+  homepage 'http://www.openmodelica.org/'
   url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_17092.orig.tar.gz'
   sha1 '854202df9dc2951afe4403f004d052ca0010dfe9'
 
