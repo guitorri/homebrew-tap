@@ -2,8 +2,9 @@ require 'formula'
 
 class Openmodelica < Formula
   homepage 'http://www.openmodelica.org/'
-  url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_17092.orig.tar.gz'
-  sha1 '854202df9dc2951afe4403f004d052ca0010dfe9'
+  url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_17628.orig.tar.gz'
+  sha1 'cb31e8cb1e7b6b1c1e34491dc526bffebf234c6a'
+  version '1.9.0'
 
   head 'https://openmodelica.org/svn/OpenModelica/trunk' , :using => :svn
 
@@ -25,7 +26,7 @@ class Openmodelica < Formula
   depends_on 'lp_solve' => [:build, 'python']
   depends_on 'omniorb' => [:build, 'with-python']
 
-  # skip unwanted Qt tools, configure Qt framework on OMPlot
+  # skip unwanted tools, configure Qt framework on OMPlot
   def patches
     DATA
   end
@@ -36,6 +37,7 @@ class Openmodelica < Formula
                           "--with-omniORB=#{Formula.factory('omniorb').opt_prefix}",
                           "--with-qwt=#{Formula.factory('qwt').opt_prefix}",
                           "--without-paradiseo",
+                          "--with-lapack=-framework Accelerate", # avoid the included OpenBlas
                           "--enable-modelica3d=no",
                           "--enable-omnotebook=no"
     system "make"
