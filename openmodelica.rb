@@ -30,6 +30,12 @@ class Openmodelica < Formula
     DATA
   end
 
+  fails_with :clang do
+    build 500
+    cause %q[error: reference to 'lock_guard' is ambiguous.]
+   end
+
+
   def install
     system "autoconf"
     system "./configure", "--prefix=#{prefix}",
