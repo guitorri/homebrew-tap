@@ -2,8 +2,10 @@ require 'formula'
 
 class Openmodelica < Formula
   homepage 'http://www.openmodelica.org/'
-  url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_17628.orig.tar.gz'
-  sha1 'cb31e8cb1e7b6b1c1e34491dc526bffebf234c6a'
+  #url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_17628.orig.tar.gz'
+  #sha1 'cb31e8cb1e7b6b1c1e34491dc526bffebf234c6a'
+  url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_19489.orig.tar.gz'
+  sha1 '193fb0ef2ecfea0e9cc3628e137be98ac55e2b7e'
   version '1.9.0'
 
   head 'https://openmodelica.org/svn/OpenModelica/trunk' , :using => :svn
@@ -12,19 +14,18 @@ class Openmodelica < Formula
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build
   depends_on 'libtool' => :build
-  depends_on 'cmake' => :build
   depends_on 'bison' => :build
   depends_on 'flex' => :build
   depends_on 'rml-mmc' => :build
   depends_on 'readline' => :build
   depends_on 'sundials' => :build
-  depends_on 'sqlite' => :build
+  depends_on 'sqlite' => [:build, 'universal']
   depends_on 'gettext' => :build
   depends_on 'cmake' => :build
   depends_on 'qt' => :build
   depends_on 'qwt' => :build
   depends_on 'lp_solve' => [:build, 'python']
-  depends_on 'omniorb' => [:build, 'with-python']
+  depends_on 'omniorb' => :build
 
   # skip unwanted tools, configure Qt framework on OMPlot
   def patches
@@ -34,6 +35,7 @@ class Openmodelica < Formula
   def install
     system "autoconf"
     system "./configure", "--prefix=#{prefix}",
+                          #"--without-rml",
                           "--with-omniORB=#{Formula.factory('omniorb').opt_prefix}",
                           "--with-qwt=#{Formula.factory('qwt').opt_prefix}",
                           "--without-paradiseo",
