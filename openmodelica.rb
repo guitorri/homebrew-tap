@@ -2,10 +2,8 @@ require 'formula'
 
 class Openmodelica < Formula
   homepage 'http://www.openmodelica.org/'
-  #url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_17628.orig.tar.gz'
-  #sha1 'cb31e8cb1e7b6b1c1e34491dc526bffebf234c6a'
   url 'https://build.openmodelica.org/apt/pool/contrib/openmodelica_19489.orig.tar.gz'
-  sha1 '193fb0ef2ecfea0e9cc3628e137be98ac55e2b7e'
+  sha1 'cb31e8cb1e7b6b1c1e34491dc526bffebf234c6a'
   version '1.9.0'
 
   head 'https://openmodelica.org/svn/OpenModelica/trunk' , :using => :svn
