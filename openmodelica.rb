@@ -43,7 +43,6 @@ class Openmodelica < Formula
 
 
   def install
-    ENV.j1
     system "autoconf"
     system "./configure", "--prefix=#{prefix}",
                           "--with-omniORB=#{Formula.factory('omniorb').opt_prefix}",
@@ -55,6 +54,7 @@ class Openmodelica < Formula
 
     if ENV.compiler == :clang
       ENV.append 'CXXFLAGS', '-stdlib=libc++'
+      ENV.O2 # O3 seems to cause: /usr/local/opt/rml-mmc/bin/rmlc[83]: eval: line 1: 11313: Memory fault
     end
 
     system "make"
