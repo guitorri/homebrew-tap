@@ -2,12 +2,12 @@ require 'formula'
 
 class RmlMmc < Formula
   homepage 'http://www.ida.liu.se/labs/pelab/rml'
-  url 'http://build.openmodelica.org/apt/pool/contrib/rml-mmc_260.orig.tar.gz'
-  version '2.6.0'
-  sha1 '22acb73e9d5e0a52c853a8cf73cf10d02d749d36'
-  #url 'http://build.openmodelica.org/apt/pool/contrib/rml-mmc_271.orig.tar.gz'
-  #version '2.7.1'
-  #sha1 '2805a46d9c9abae5c7f007b26faf4927b88bd541'
+  #url 'http://build.openmodelica.org/apt/pool/contrib/rml-mmc_260.orig.tar.gz'
+  #version '2.6.0'
+  #sha1 '22acb73e9d5e0a52c853a8cf73cf10d02d749d36'
+  url 'http://build.openmodelica.org/apt/pool/contrib/rml-mmc_271.orig.tar.gz'
+  version '2.7.1'
+  sha1 '2805a46d9c9abae5c7f007b26faf4927b88bd541'
 
 
   # Attention, has a self-signed certificate and svn will prompt you, so
