@@ -12,6 +12,8 @@ class Qucs < Formula
   depends_on 'flex' => :build
   depends_on 'qt' => [:build, "with-qt3support"]
 
+  depends_on "apple-gcc42" if MacOS.version >= :mavericks
+
   #depends_on 'octave' => :optional
 
   #./qucs-0.0.17.mountain_lion.bottle.tar.gz
@@ -25,6 +27,14 @@ class Qucs < Formula
   end
 
   def install
+
+    if ENV.compiler == :clang
+      opoo <<-EOS.undent
+        Qucs 0.0.17 will fail with latest Clang.
+        Please use:
+          brew install qucs --cc=gcc-4.2
+      EOS
+    end
 
     # update asco configure script after patching
     cd 'asco' do
