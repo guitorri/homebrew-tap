@@ -14,6 +14,7 @@ class Asco < Formula
 
     # patch configure.ac to set Darwin as Unix
     # point to correct include location
+    # remove deprecated header include (FreeBSD)
     DATA
   end
 
@@ -54,3 +55,27 @@ index 6d362b0..6300469 100644
  AC_PATH_PROG(CC_MPI, mpicc, :)
  AM_CONDITIONAL(MPI, test "$CC_MPI" != ":")
 
+diff --git a/de36.c b/de36.c
+index b573d5c..5955197 100644
+--- a/de36.c
++++ b/de36.c
+@@ -475,6 +475,8 @@ int DE(int argc, char *argv[])
+ 	char laux[LONGSTRINGSIZE];
+ 	int ii;
+ 
++  setvbuf(stdout, NULL, _IONBF, 0); /* set unbuffered */
++
+ 	#ifdef MPI
+ 	double tmp_y[MAXPOP][MAXDIM], trial_cost_y[MAXPOP];
+ 	int k, m, count;
+diff -ur orig/asco/nmlatest.c ./asco/nmlatest.c
+--- a/nmlatest.c	2006-05-22 10:54:00.000000000 +0200
++++ b/nmlatest.c	2014-02-18 22:05:13.000000000 +0100
+@@ -52,7 +52,6 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <malloc.h>
+ #include <math.h>
+ 
+ /* #include "auxfunc.h" */
