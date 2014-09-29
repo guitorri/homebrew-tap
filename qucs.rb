@@ -22,9 +22,17 @@ class Qucs < Formula
   depends_on 'qt' => [:build, "with-qt3support"]
 
   # use ADMS and ASCO formulae, disable configure/build of shipped packages
-  depends_on 'adms' => :recomended
-  depends_on 'asco' => :recomended
+  depends_on 'adms' => :recommended
+  depends_on 'asco' => :recommended
   #depends_on 'octave' => :optional
+
+  # work around multiple Qt versions (official and brew)
+  stable do
+    patch :p0 do
+      url "https://trac.macports.org/export/125874/trunk/dports/science/qucs/files/patch-configure.diff"
+      sha1 "3d9cebac5c2dbe5ed23a03df59cf20a6565de9df"
+    end
+  end
 
   def install
 
@@ -50,6 +58,7 @@ class Qucs < Formula
                             "--disable-dependency-tracking",
                             "--disable-asco", # use formula
                             "--disable-adms", # use formula
+                            "--disable-sdk",  # don't look for SDK
                             "--prefix=#{prefix}"
       system "make", "install"
     end # if stable
