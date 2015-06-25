@@ -58,3 +58,17 @@ index d99af96..ab74589 100644
  
    --cxxflags | -cxxflags | -c)
  	echo "$cxxflags -I$includedir" ;;
+
+diff --git a/kernel/fhdl_stream.cc b/kernel/fhdl_stream.cc
+index b56cbfe..dcdf745 100644
+--- a/kernel/fhdl_stream.cc
++++ b/kernel/fhdl_stream.cc
+@@ -3,6 +3,7 @@
+ #include <unistd.h>
+ #endif
+ #include <sstream>
++#include <cstring>
+ #include <assert.h>
+ #include <freehdl/kernel-error.hh>
+ #include <freehdl/kernel-fhdl-stream.hh>
+
