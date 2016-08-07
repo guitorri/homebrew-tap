@@ -6,7 +6,7 @@ require "formula"
 class Bal < Formula
   homepage "https://sourceforge.net/projects/biflib/"
   url "http://sourceforge.net/projects/biflib/files/Releases/Beta/0.9/bal-0.9.5.tar.gz"
-  sha1 "702f729956de6d98dcfa82ed787818af5c454d4f"
+  sha256 "bf6c53e93d06fc333da51245c539d32cc73f9e500ed7a1869d54c1c3d143a411"
 
 
   depends_on 'autoconf' => :build

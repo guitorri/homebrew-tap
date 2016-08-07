@@ -5,7 +5,7 @@ class Qucs < Formula
 
   stable do
     url 'http://sourceforge.net/projects/qucs/files/qucs/0.0.18/qucs-0.0.18.tar.gz'
-    sha1 'e13580c12fa4f9d7a09f6a2b412bd772362e44ac'
+    sha256 '3609a18b57485dc9f19886ac6694667f3251702175bd1cbbbea37981b2c482a7'
   end
 
   head do
@@ -30,7 +30,7 @@ class Qucs < Formula
   stable do
     patch :p0 do
       url "https://trac.macports.org/export/125874/trunk/dports/science/qucs/files/patch-configure.diff"
-      sha1 "3d9cebac5c2dbe5ed23a03df59cf20a6565de9df"
+      sha256 "0b8742377637b8f6638cef7b3cdd12a3cf16c6497012cc85aaf566c2bc68d711"
     end
   end
 

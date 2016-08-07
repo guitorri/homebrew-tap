@@ -3,7 +3,7 @@ require 'formula'
 class Adms < Formula
   homepage 'https://github.com/Qucs/ADMS'
   url 'http://sourceforge.net/projects/mot-adms/files/adms-source/2.3/adms-2.3.4.tar.gz'
-  sha1 '578cd173302725429e3982d70a0e2be335e27d40'
+  sha256 '63498c24c3064ae86eae135ac7324e532bc8bb772eca5208204814df8f27931a'
 
   head do
     url 'https://github.com/Qucs/ADMS.git'

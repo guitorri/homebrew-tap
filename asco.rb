@@ -3,7 +3,7 @@ require 'formula'
 class Asco < Formula
   homepage 'http://asco.sourceforge.net/index.html'
   url 'http://sourceforge.net/projects/asco/files/asco/0.4.9/ASCO-0.4.9.tar.gz'
-  sha1 '1025587696f84c6959e672ad890971690c63a0a4'
+  sha256 'd17ed1431e89886d9992aebe1993d25e4e64428072007f03ce3b13de31c1b79e'
 
   depends_on 'autoconf' => :build
   depends_on 'automake' => :build

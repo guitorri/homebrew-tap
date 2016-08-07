@@ -5,7 +5,7 @@ class Necpp < Formula
 
   stable do
     url "https://github.com/tmolteno/necpp/archive/v1.5.3.tar.gz"
-    sha1 "eca5084b1996663b9258018d155e97c774ddfda1"
+    sha256 "e8e898e81de89e426d50758d71cb569c2aceb1b2972cfaaa201ebe0938e22f50"
   end
 
   head do

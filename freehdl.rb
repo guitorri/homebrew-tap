@@ -3,7 +3,7 @@ require 'formula'
 class Freehdl < Formula
   homepage ''
   url 'http://sourceforge.net/projects/qucs/files/qucs/0.0.16/freehdl-0.0.8.tar.gz'
-  sha1 'fa89707d1340e8729eb444062a6af91f360b0259'
+  sha256 '7f0978f8252329450de43e98c04c15fdd8a3f2bdc5ca91f75f8f5dd280c6ed84'
 
   depends_on 'pkg-config' => :build
   depends_on 'libtool' => :build
