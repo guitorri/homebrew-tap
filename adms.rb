@@ -2,8 +2,8 @@ require 'formula'
 
 class Adms < Formula
   homepage 'https://github.com/Qucs/ADMS'
-  url 'http://sourceforge.net/projects/mot-adms/files/adms-source/2.3/adms-2.3.4.tar.gz'
-  sha256 '63498c24c3064ae86eae135ac7324e532bc8bb772eca5208204814df8f27931a'
+  url 'http://sourceforge.net/projects/mot-adms/files/adms-source/2.3/adms-2.3.6.tar.gz'
+  sha256 '7307e8c63967696209c514545001fa496538112af7b812958950b22e0d45c9e6'
 
   head do
     url 'https://github.com/Qucs/ADMS.git'
