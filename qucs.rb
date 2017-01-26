@@ -1,67 +1,42 @@
-require 'formula'
-
 class Qucs < Formula
-  homepage 'http://sourceforge.net/projects/qucs/'
+  homepage "http://sourceforge.net/projects/qucs/"
 
-  stable do
-    url 'http://sourceforge.net/projects/qucs/files/qucs/0.0.18/qucs-0.0.18.tar.gz'
-    sha256 '3609a18b57485dc9f19886ac6694667f3251702175bd1cbbbea37981b2c482a7'
+  url "http://sourceforge.net/projects/qucs/files/qucs/0.0.19/qucs-0.0.19.tar.gz"
+  sha256 "45c6434fde24c533e63550675ac21cdbd3cc6cbba29b82a1dc3f36e7dd4b3b3e"
+
+  depends_on "cartr/qt4/qt"
+  depends_on "pkg-config" => :build
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "bison" => :build
+  depends_on "flex" => :build
+  depends_on "adms" => :build
+
+  resource "documentation" do
+    url "https://sourceforge.net/projects/qucs/files/qucs-binary/0.0.19/qucs-doc-0.0.19-PDF.tar.gz"
+    sha256 "69f1c36192b9c5fc7c0463d44009ead91e11dc286728e55e53520497d6a097b5"
   end
-
-  head do
-    url  'https://github.com/Qucs/qucs.git', :branch => 'master'
-    depends_on 'asco' => :build
-    depends_on 'libtool' => :build
-  end
-
-  depends_on 'pkg-config' => :build
-  depends_on 'autoconf' => :build
-  depends_on 'automake' => :build
-  depends_on 'bison' => :build
-  depends_on 'flex' => :build
-  depends_on 'qt' => [:build, "with-qt3support"]
-
-  # use ADMS and ASCO formulae, disable configure/build of shipped packages
-  depends_on 'adms' => :recommended
-  depends_on 'asco' => :recommended
-  #depends_on 'octave' => :optional
 
   # work around multiple Qt versions (official and brew)
-  stable do
-    patch :p0 do
-      url "https://trac.macports.org/export/125874/trunk/dports/science/qucs/files/patch-configure.diff"
-      sha256 "0b8742377637b8f6638cef7b3cdd12a3cf16c6497012cc85aaf566c2bc68d711"
-    end
+  patch :p1 do
+    # the first one below no longer applies
+    #url "https://trac.macports.org/export/125874/trunk/dports/science/qucs/files/patch-configure.diff"
+    url "https://raw.githubusercontent.com/guitorri/homebrew-tap/master/patches/patch-configure-0.0.19.patch"
+    sha256 "bf9ffced83ef5631922e551f1950e7fdaad5747ca481b97406b64cad5ca4c90e"
   end
 
   def install
+      # for some reason the documentation must be installed first.
+      share.install resource("documentation")
 
-    if build.head?
-
-      cd 'qucs' do
-        system "sh", "autogen.sh"
-        system "./configure", "--enable-maintainer-mode", "--prefix=#{prefix}"
-        system "make", "install"
-      end
-
-      ENV.j1 # head does not build in parallel, race on ADMS? issue with newer bison fix adms
-
-      cd 'qucs-core' do
-        system "sh", "bootstrap.sh"
-        system "./configure", "--enable-maintainer-mode", "--prefix=#{prefix}"
-        system "make", "install"
-      end
-
-    # stable
-    else
       system "./configure", "--disable-debug",
                             "--disable-dependency-tracking",
-                            "--disable-asco", # use formula
-                            "--disable-adms", # use formula
-                            "--disable-sdk",  # don't look for SDK
+                            "--disable-sdk",  # don"t look for SDK
+                            "--disable-doc",
                             "--prefix=#{prefix}"
       system "make", "install"
-    end # if stable
+
+      # note, macdeploy is currenlty failing, but the binaries should still work.
   end
 
   def caveats; <<-EOS.undent
@@ -69,9 +44,7 @@ class Qucs < Formula
       #{prefix}
 
     To link the application to a normal Mac OS X location:
-        brew linkapps
-    or:
-        ln -s #{prefix}/qucs.app ~/Applications
+        ln -s #{prefix}/qucs.app /Applications
     EOS
   end
 
