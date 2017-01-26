@@ -1,0 +1,53 @@
+From 08cb8286a0d1fc95125a069001dca00034963676 Mon Sep 17 00:00:00 2001
+From: Guilherme Brondani Torri <guitorri@gmail.com>
+Date: Thu, 26 Jan 2017 20:14:42 +0100
+Subject: [PATCH] patch-configure-0.0.19
+
+The one below no longer applies:
+https://trac.macports.org/export/125874/trunk/dports/science/qucs/files/patch-configure.diff
+
+---
+ qucs/configure | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/qucs/configure b/qucs/configure
+index ebca2440f..cf6f8e8d2 100755
+--- a/qucs/configure
++++ b/qucs/configure
+@@ -6758,7 +6758,7 @@ $as_echo "found in $QT_LDFLAGS" >&6; }
+                         with_qt=no
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Qt OS X framework" >&5
+ $as_echo_n "checking for Qt OS X framework... " >&6; }
+-    paths="$QTDIR/lib /Library/Frameworks /opt/local/lib /usr/local/lib"
++    paths="$QTDIR/lib ${prefix}/Library/Frameworks /opt/local/lib /usr/local/lib"
+     for path in $paths; do
+       if test -f "$path/QtGui.framework/Headers/QApplication"; then
+         with_qt=yes
+@@ -6779,13 +6779,14 @@ $as_echo "found in $path" >&6; }
+       CPPFLAGS="$CPPFLAGS -I$path/QtSvg.framework/Headers"
+       CPPFLAGS="$CPPFLAGS -I$path/QtScript.framework/Headers"
+       CPPFLAGS="$CPPFLAGS -I$path/Qt3Support.framework/Headers"
++      QT_LDFLAGS="$QT_LDFLAGS -F$path"
+     else
+       as_fn_error $? "not found" "$LINENO" 5
+     fi
+ 
+         QT_DEF="-DQT_SHARED -DQT3_SUPPORT"
+     CPPFLAGS="$CPPFLAGS $QT_DEF"
+-    QT_LDFLAGS="-headerpad_max_install_names"
++    QT_LDFLAGS="$QT_LDFLAGS -headerpad_max_install_names"
+ 
+     if test "$enable_qucs_gui_debug" = yes; then
+       CPPFLAGS="$CPPFLAGS -W -Wall"
+@@ -6938,7 +6939,7 @@ $as_echo "SDK $with_macosx_sdk at $MACOSX_SDK_PATH" >&6; }
+     DEVELOPER_DIR="${MACOSX_SDK_PATH%/SDKs*}"
+     DEVELOPER_DIR="${DEVELOPER_DIR%/Platforms*}"
+     export DEVELOPER_DIR
+-    FRAMEWORKSHOME="$MACOSX_SDK_PATH/System/Library/Frameworks"
++    FRAMEWORKSHOME="${prefix}/Library/Frameworks"
+     MACOSX_DEPLOYMENT_TARGET="$with_macosx_version_min_required"
+ 
+     case "$with_macosx_version_min_required" in
+-- 
+2.11.0
+
