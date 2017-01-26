@@ -72,3 +72,65 @@ index b56cbfe..dcdf745 100644
  #include <freehdl/kernel-error.hh>
  #include <freehdl/kernel-fhdl-stream.hh>
 
+diff --git a/freehdl/kernel-db.hh b/freehdl/kernel-db.hh
+index a6b2a7c..807aece 100644
+--- a/freehdl/kernel-db.hh
++++ b/freehdl/kernel-db.hh
+@@ -254,7 +254,7 @@ public:
+ 
+ // A hash function template used tp generate a hash number from
+ // d
+-class db_basic_key_hash : public hash<unsigned long> {
++class db_basic_key_hash : public std::hash<unsigned long> {
+ public:
+   size_t operator()(const db_basic_key& x) const {
+     return (*(hash<unsigned long> *)this)(((unsigned long)x.value)>>2);
+diff --git a/freehdl/kernel-util.hh b/freehdl/kernel-util.hh
+index 2d0ad21..74e1bea 100644
+--- a/freehdl/kernel-util.hh
++++ b/freehdl/kernel-util.hh
+@@ -24,7 +24,7 @@ using namespace __gnu_cxx;
+ // A hash function template used tp generate a hash number from
+ // pointer values.
+ template<class T>
+-class pointer_hash : public hash<unsigned long> {
++class pointer_hash : public std::hash<unsigned long> {
+ public:
+   size_t operator()(const T& x) const {
+     return (*(hash<unsigned long> *)this)(((unsigned long)x)>>2);
+
+diff --git a/v2cc/v2cc-util.h b/v2cc/v2cc-util.h
+index cad6ece..8197c98 100644
+--- a/v2cc/v2cc-util.h
++++ b/v2cc/v2cc-util.h
+@@ -241,6 +241,7 @@ convert_string(const string &str, int (*f)(int))
+ }
+ 
+ /* Convert an integer value into a string */
++/*
+ template <class T>
+ inline string
+ to_string(T i)
+@@ -266,6 +267,7 @@ to_string(double i)
+     return str + ".0";
+ #endif
+ }
++*/
+ 
+ /* Print scalar value into a string */
+ string
+
+diff --git a/v2cc/v2cc-util.h b/v2cc/v2cc-util.h
+index 8197c98..c70c2a3 100644
+--- a/v2cc/v2cc-util.h
++++ b/v2cc/v2cc-util.h
+@@ -452,7 +452,7 @@ emit_posinfo(pIIR_PosInfo pi, string &str, pIIR_PosInfo_TextFile last_pos, int l
+   // Emit line number and file name
+   str += "#line " + to_string(pit->line_number);
+   if (last_pos == NO_SOURCE_LINE)
+-    str += " \"" + to_string(pit->file_name) + "\"\n";
++    str += " \"" + string(pit->file_name) + "\"\n";
+   else
+     str += "\n";
+   
+
