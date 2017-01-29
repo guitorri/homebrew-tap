@@ -29,4 +29,9 @@ class Adms < Formula
   test do
     system "admsXml"
   end
+
+  bottle do
+    root_url "https://dl.bintray.com/guitorri/homebrew-tap"
+    sha256 "49bf86f2750ce1d97f750e4287ef181e6bc10e8bf5de5fe045027e6918f969fc" => :sierra
+  end
 end
