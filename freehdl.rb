@@ -29,6 +29,11 @@ class Freehdl < Formula
                           "--prefix=#{prefix}"
     system "make", "install"
   end
+
+  bottle do
+    root_url "https://dl.bintray.com/guitorri/homebrew-tap"
+    sha256 "a4a2f00c98d7f5bdad2162a7db511de837217108a0dd47a81358f179e1b1c70a" => :sierra
+  end
 end
 
 __END__
