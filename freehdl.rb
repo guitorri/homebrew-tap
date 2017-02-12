@@ -17,6 +17,11 @@ class Freehdl < Formula
     cause 'not sure about the reason'
   end
 
+  # failed attempt to fix it for gcc-6:
+  # https://github.com/guitorri/homebrew-tap/commit/67cefd067b4815bc8a79cacb711b027645109a78
+  fails_with :gcc => "6" do
+    cause 'multiple errors'
+  end
 
   def install
 
