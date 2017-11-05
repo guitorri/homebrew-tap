@@ -1,0 +1,59 @@
+From dbb76d135a565e7f557d9fea744ae0a0a740f2c5 Mon Sep 17 00:00:00 2001
+From: Guilherme Brondani Torri <guitorri@gmail.com>
+Date: Sat, 4 Nov 2017 16:04:58 +0100
+Subject: [PATCH 3/3] parse arguments on configure
+
+It assumed prefix was the first argument.
+If a package manager tries to inject other flags, such as
+--disable-debug, the configure script will fail to set prefix.
+---
+ configure | 32 +++++++++++++++-----------------
+ 1 file changed, 15 insertions(+), 17 deletions(-)
+
+diff --git a/configure b/configure
+index 062ae38..f89ef72 100755
+--- a/configure
++++ b/configure
+@@ -4,24 +4,22 @@
+ #  This stuff introduced by SDB to enable --prefix
+ #  at configure time
+ 
+-# echo Input flag = $1
+-if test "x$1" != "x"; then
+-    # echo Found input parameter -- $1
+-    #  Now see if the parameter is --prefix=
+-    if test "x${1#--prefix=}" != "x$1"; then
+-	# echo "Found --prefix in input args.  Setting prefix directory."
+-	prefix=${1#--prefix=}
+-    else
+-	# echo "Found unrecognized parameter in input args."
+-	#  Just use the default prefix dir.
+-	prefix=/usr/local
+-    fi
++# default
++prefix=/usr/local
+ 
+-else
+-    # echo "No input parameter found."
+-    #  Just use the default prefix dir
+-    prefix=/usr/local
+-fi
++# parse command line arguments
++for i in "$@"
++do
++case $i in
++    --prefix=*)
++    prefix="${i#*=}"
++    shift
++    ;;
++    *)
++    # unknown option
++    ;;
++esac
++done
+ 
+ args="--prefix=$prefix"
+ 
+-- 
+2.11.1
+

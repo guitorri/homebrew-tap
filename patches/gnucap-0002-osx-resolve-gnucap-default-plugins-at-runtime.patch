@@ -1,0 +1,26 @@
+From 9455edaef8e7b5d48bf643bf24136aa6146c466c Mon Sep 17 00:00:00 2001
+From: Guilherme Brondani Torri <guitorri@gmail.com>
+Date: Sat, 4 Nov 2017 14:39:52 +0100
+Subject: [PATCH 2/3] osx: resolve gnucap-default-plugins at runtime
+
+Leave symbols undefined.
+---
+ apps/configure | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/apps/configure b/apps/configure
+index 1fbb987..1981d04 100755
+--- a/apps/configure
++++ b/apps/configure
+@@ -38,7 +38,7 @@ VPATH = .:..
+ CCC = c++
+ TARGET_EXT = .so
+ 
+-LDFLAGS = -shared
++LDFLAGS = -shared -undefined dynamic_lookup
+ 
+ .SUFFIXES:
+ .SUFFIXES: .o .cc
+-- 
+2.11.1
+
