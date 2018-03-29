@@ -5,13 +5,6 @@ class Adms < Formula
   url 'http://sourceforge.net/projects/mot-adms/files/adms-source/2.3/adms-2.3.6.tar.gz'
   sha256 '7307e8c63967696209c514545001fa496538112af7b812958950b22e0d45c9e6'
 
-  head do
-    url 'https://github.com/Qucs/ADMS.git'
-    depends_on 'cmake' => :build
-    depends_on 'XML::LibXML' => :perl
-    depends_on 'GD' => :perl
-  end
-
   depends_on 'automake'
   depends_on 'autoconf'
   depends_on 'flex' => :build
